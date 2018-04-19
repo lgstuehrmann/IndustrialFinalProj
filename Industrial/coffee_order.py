@@ -3,9 +3,9 @@ import Tkinter as tk
 import socket
 from PIL import ImageTk, Image
 window = tk.Tk()
-order = 0
+order = "0"
 def black():
-	order = 1
+	order = "1"
 	window2 = tk.Toplevel(window)
 	
 	cat_img2 = ImageTk.PhotoImage(Image.open("exc.gif"))
@@ -23,7 +23,7 @@ def black():
 	window2.mainloop()
 
 def with_Sugar():
-	order = 2
+	order = "2"
 	window2 = tk.Toplevel(window)
 
 	cat_img2 = ImageTk.PhotoImage(Image.open("cat5.gif"))
@@ -41,7 +41,7 @@ def with_Sugar():
 	window2.mainloop()
 	
 def with_Milk():
-	order = 3
+	order = "3"
 	window2 = tk.Toplevel(window)
 	
 	cat_img2 = ImageTk.PhotoImage(Image.open("cat2.jpg"))
@@ -59,7 +59,7 @@ def with_Milk():
 	window2.mainloop()
 	
 def both():
-	order = 4
+	order = "4"
 	window2 = tk.Toplevel(window)
 
 	
@@ -100,9 +100,13 @@ def make_GUI():
 def UDP_sending():
    UDP_IP = "127.0.0.1"
    UDP_PORT = 5005
-   MESSAGE = str(order)
-   sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM) # internet,UDP
-   sock.sendto(MESSAGE, (UDP_IP, UDP_PORT))
+   MESSAGE = order
+   sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM,0) # internet,UDP
+   sock.connect((UDP_IP,UDP_PORT))
+   
+   sock.send(MESSAGE)
+   
+   sock.close()
 if __name__ == "__main__":
 	
 	make_GUI()
