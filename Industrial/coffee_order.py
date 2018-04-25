@@ -6,7 +6,7 @@ window = tk.Tk()
 global order
 def black():
 	global order
-	order =  order+"1"
+	order = "1"
 	window2 = tk.Toplevel(window)
 	
 	cat_img2 = ImageTk.PhotoImage(Image.open("exc.gif"))
@@ -27,7 +27,7 @@ def black():
 
 def with_Sugar():
 	global order
-	order = order+ "2"
+	order = "2"
 	window2 = tk.Toplevel(window)
 
 	cat_img2 = ImageTk.PhotoImage(Image.open("cat5.gif"))
@@ -48,7 +48,7 @@ def with_Sugar():
 	
 def with_Milk():
 	global order
-	order = order+"3"
+	order = "3"
 	window2 = tk.Toplevel(window)
 	
 	cat_img2 = ImageTk.PhotoImage(Image.open("cat2.jpg"))
@@ -69,7 +69,7 @@ def with_Milk():
 	
 def both():
 	global order
-	order = order + "4"
+	order = "4"
 	window2 = tk.Toplevel(window)
 
 	
@@ -91,13 +91,15 @@ def both():
 def small():
 	global order
 	order ="s"
+	UDP_sending()
 def medium():
 	global order
 	order= "m"
+	UDP_sending()
 def large():
 	global order
 	order= "l"
-	
+	UDP_sending()	
 def make_GUI():
 	
 	window.title("Coffee Shop")
