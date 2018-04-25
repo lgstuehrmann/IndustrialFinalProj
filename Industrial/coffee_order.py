@@ -137,7 +137,6 @@ def UDP_sending():
    print(order)
    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM,0) # internet,UDP
    sock.connect((UDP_IP,UDP_PORT))
-   
    sock.send(MESSAGE)
    
    sock.close()
