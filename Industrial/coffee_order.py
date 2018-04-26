@@ -6,16 +6,22 @@ window = tk.Tk()
 global order
 def black():
 	global order
+	if order == "s":
+		size = "SMALL"
+	if order == "m":
+		size = "MEDIUM"
+	if order == "l":
+		size = "LARGE"
 	order = "1"
 	window2 = tk.Toplevel(window)
 	
 	cat_img2 = ImageTk.PhotoImage(Image.open("exc.gif"))
 
 	window2.title("Order Confirmation")
-	window2.geometry("600x500")
+	window2.geometry("700x600")
 	window2.configure(background='white')
 	tk.Label(window2, 
-		 text="YOU HAVE ORDERED BLACK COFFEE!",
+		 text="YOU HAVE ORDERED A " + size + " BLACK COFFEE",
 		 fg = "blue",
 		 bg = "yellow",
 		 font = "Verdana 18 bold").pack()
@@ -27,16 +33,22 @@ def black():
 
 def with_Sugar():
 	global order
+	if order == "s":
+		size = "SMALL"
+	if order == "m":
+		size = "MEDIUM"
+	if order == "l":
+		size = "LARGE"
 	order = "2"
 	window2 = tk.Toplevel(window)
 
 	cat_img2 = ImageTk.PhotoImage(Image.open("cat5.gif"))
 
 	window2.title("Order Confirmation")
-	window2.geometry("600x500")
+	window2.geometry("700x600")
 	window2.configure(background='white')
 	tk.Label(window2, 
-		 text="YOU HAVE ORDERED COFFEE WITH SUGAR!",
+		 text="YOU HAVE ORDERED A " + size + " COFFEE WITH SUGAR ",
 		 fg = "blue",
 		 bg = "yellow",
 		 font = "Verdana 18 bold").pack()
@@ -48,16 +60,22 @@ def with_Sugar():
 	
 def with_Milk():
 	global order
+	if order == "s":
+		size = "SMALL"
+	if order == "m":
+		size = "MEDIUM"
+	if order == "l":
+		size = "LARGE"
 	order = "3"
 	window2 = tk.Toplevel(window)
 	
 	cat_img2 = ImageTk.PhotoImage(Image.open("cat2.jpg"))
 
 	window2.title("Order Confirmation")
-	window2.geometry("600x500")
+	window2.geometry("700x600")
 	window2.configure(background='white')
 	tk.Label(window2, 
-		 text="YOU HAVE ORDERED COFFEE WITH MILK!",
+		 text="YOU HAVE ORDERED A " + size +" COFFEE WITH MILK",
 		 fg = "blue",
 		 bg = "yellow",
 		 font = "Verdana 18 bold").pack()
@@ -68,7 +86,14 @@ def with_Milk():
 	window2.mainloop()
 	
 def both():
+	size = " "
 	global order
+	if order == "s":
+		size = "SMALL"
+	if order == "m":
+		size = "MEDIUM"
+	if order == "l":
+		size = "LARGE"
 	order = "4"
 	window2 = tk.Toplevel(window)
 
@@ -76,10 +101,10 @@ def both():
 	cat_img2 = ImageTk.PhotoImage(Image.open("pizza.gif"))
 
 	window2.title("Order Confirmation")
-	window2.geometry("600x500")
+	window2.geometry("700x600")
 	window2.configure(background='white')
 	tk.Label(window2, 
-		 text="YOU HAVE ORDERED COFFEE WITH EVERYTHING!",
+		 text="YOU HAVE ORDERED A " + size + " COFFEE WITH EVERYTHING",
 		 fg = "blue",
 		 bg = "yellow",
 		 font = "Verdana 14 bold").pack()
@@ -131,15 +156,17 @@ def make_GUI():
 
 def UDP_sending():
    global order
-   UDP_IP = "127.0.0.1"
-   UDP_PORT = 5005
+   UDP_IP = "192.168.125.2"
+   UDP_PORT = 1025
    MESSAGE = order
    print(order)
-   sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM,0) # internet,UDP
-   sock.connect((UDP_IP,UDP_PORT))
-   sock.send(MESSAGE)
-   
-   sock.close()
+   sock = socket.socket() # internet,UDP
+   sock.bind((UDP_IP,UDP_PORT))
+   sock.listen(5)
+   c, addr = sock.accept()
+   print 'Got connection from socket', addr
+   c.send(order)
+   c.close()
 if __name__ == "__main__":
 	
 	make_GUI()
